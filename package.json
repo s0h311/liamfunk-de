@@ -7,7 +7,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "lint": "oxlint --fix",
-    "fmt": "oxfmt"
+    "fmt": "oxfmt",
+    "matrix": "node /Users/soheil/projects/matrix/src/index.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
