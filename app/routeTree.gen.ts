@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './pages/__root'
 import { Route as IndexRouteImport } from './pages/index'
 import { Route as ProtoIndexRouteImport } from './pages/proto.index'
 import { Route as ProtoSlugRouteImport } from './pages/proto.$slug'
+import { Route as SpikeARouteImport } from './pages/spike.a'
+import { Route as SpikeBRouteImport } from './pages/spike.b'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,34 +30,52 @@ const ProtoSlugRoute = ProtoSlugRouteImport.update({
   path: '/proto/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SpikeARoute = SpikeARouteImport.update({
+  id: '/spike/a',
+  path: '/spike/a',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpikeBRoute = SpikeBRouteImport.update({
+  id: '/spike/b',
+  path: '/spike/b',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/proto/$slug': typeof ProtoSlugRoute
+  '/spike/a': typeof SpikeARoute
+  '/spike/b': typeof SpikeBRoute
   '/proto/': typeof ProtoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/proto/$slug': typeof ProtoSlugRoute
+  '/spike/a': typeof SpikeARoute
+  '/spike/b': typeof SpikeBRoute
   '/proto': typeof ProtoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/proto/$slug': typeof ProtoSlugRoute
+  '/spike/a': typeof SpikeARoute
+  '/spike/b': typeof SpikeBRoute
   '/proto/': typeof ProtoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/proto/$slug' | '/proto/'
+  fullPaths: '/' | '/proto/$slug' | '/spike/a' | '/spike/b' | '/proto/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/proto/$slug' | '/proto'
-  id: '__root__' | '/' | '/proto/$slug' | '/proto/'
+  to: '/' | '/proto/$slug' | '/spike/a' | '/spike/b' | '/proto'
+  id: '__root__' | '/' | '/proto/$slug' | '/spike/a' | '/spike/b' | '/proto/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProtoSlugRoute: typeof ProtoSlugRoute
+  SpikeARoute: typeof SpikeARoute
+  SpikeBRoute: typeof SpikeBRoute
   ProtoIndexRoute: typeof ProtoIndexRoute
 }
 
@@ -82,12 +102,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtoSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/spike/a': {
+      id: '/spike/a'
+      path: '/spike/a'
+      fullPath: '/spike/a'
+      preLoaderRoute: typeof SpikeARouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/spike/b': {
+      id: '/spike/b'
+      path: '/spike/b'
+      fullPath: '/spike/b'
+      preLoaderRoute: typeof SpikeBRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProtoSlugRoute: ProtoSlugRoute,
+  SpikeARoute: SpikeARoute,
+  SpikeBRoute: SpikeBRoute,
   ProtoIndexRoute: ProtoIndexRoute,
 }
 export const routeTree = rootRouteImport
