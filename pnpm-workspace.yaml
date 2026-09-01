@@ -1,2 +1,7 @@
 allowBuilds:
   esbuild: false
+supportedArchitectures:
+  os:
+    - linux
+  cpu:
+    - arm64
