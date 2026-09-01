@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './pages/__root'
 import { Route as IndexRouteImport } from './pages/index'
+import { Route as ProtoIndexRouteImport } from './pages/proto.index'
+import { Route as ProtoSlugRouteImport } from './pages/proto.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProtoIndexRoute = ProtoIndexRouteImport.update({
+  id: '/proto/',
+  path: '/proto/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProtoSlugRoute = ProtoSlugRouteImport.update({
+  id: '/proto/$slug',
+  path: '/proto/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/proto/$slug': typeof ProtoSlugRoute
+  '/proto/': typeof ProtoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/proto/$slug': typeof ProtoSlugRoute
+  '/proto': typeof ProtoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/proto/$slug': typeof ProtoSlugRoute
+  '/proto/': typeof ProtoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/proto/$slug' | '/proto/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/proto/$slug' | '/proto'
+  id: '__root__' | '/' | '/proto/$slug' | '/proto/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProtoSlugRoute: typeof ProtoSlugRoute
+  ProtoIndexRoute: typeof ProtoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/proto/': {
+      id: '/proto/'
+      path: '/proto'
+      fullPath: '/proto/'
+      preLoaderRoute: typeof ProtoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proto/$slug': {
+      id: '/proto/$slug'
+      path: '/proto/$slug'
+      fullPath: '/proto/$slug'
+      preLoaderRoute: typeof ProtoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProtoSlugRoute: ProtoSlugRoute,
+  ProtoIndexRoute: ProtoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
