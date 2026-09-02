@@ -46,13 +46,18 @@ pnpm dev
 local one. Open `/proto` there with the phone on the same Wi-Fi. If no Network URL appears, the
 machine's firewall is blocking port 3000.
 
-## The two rules
+## The three rules
 
 1. **Server-render the content.** Every sketch is SSR'd by the same stack the real site would use,
    and the registry imports sketches eagerly so there is no Suspense boundary hiding the fact.
    A sketch is only a fair test of the SEO/GEO hard screen if its text is in the HTML — check with
    `curl -s localhost:3000/proto/<slug>`, or with JavaScript disabled in devtools.
-2. **Keep it local to your directory.** Sketches are globbed eagerly and share one dev server, so a
+2. **Navigate like a document.** The seamless MPA is the *substrate* every concept inherits, not a
+   concept competing with them ([the shortlist](https://github.com/s0h311/liamfunk-de/issues/6)).
+   So: plain `<a>` for cross-document navigation, `<Link>` only where the single-document path is
+   deliberately wanted; state in the **path or query string, never the hash** — the hash never
+   reaches the server, which is how a URL-as-state concept silently fails rule 1.
+3. **Keep it local to your directory.** Sketches are globbed eagerly and share one dev server, so a
    file that doesn't compile takes the whole index down with it. Don't reach into `app/` or
    `server/`, and don't share code between sketches — copy it.
 
