@@ -61,6 +61,13 @@ machine's firewall is blocking port 3000.
    file that doesn't compile takes the whole index down with it. Don't reach into `app/` or
    `server/`, and don't share code between sketches — copy it.
 
+## Before you call it done
+
+Run the sketch through the **hard-screen protocol** in [`docs/hard-screens.md`](../docs/hard-screens.md)
+and report *evidence, not assertion* in the ticket: the no-JS pass, the S3 interaction counts, your
+named anti-target hits with justification, and your reduced-motion story in prose. The touch pass is
+not yours to run — Liam runs it once across all six sketches at the cut.
+
 A sketch that *throws* is contained: its own page shows the stack and every other sketch keeps
 working. Note that React abandons SSR for that page and recovers on the client, so a throwing
 sketch is also a sketch you can't judge against rule 1 until it stops throwing.
