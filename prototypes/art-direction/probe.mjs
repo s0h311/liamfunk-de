@@ -2,12 +2,23 @@
  * Evidence for the hard-screen protocol (docs/hard-screens.md), for
  * https://github.com/s0h311/liamfunk-de/issues/18
  *
- *   PROTO_BASE=http://localhost:3001 node prototypes/art-direction/probe.mjs
+ *   pnpm dev
+ *   PROTO_BASE=http://localhost:3000 node prototypes/art-direction/probe.mjs
  *
- * Needs Playwright's Chromium and its system libraries. This sandbox has the
- * browser but not the libraries and cannot install them, so they are fetched with
- * `apt-get download`, unpacked with `dpkg -x`, and every directory holding a `.so`
- * is put on LD_LIBRARY_PATH — the same workaround the spike used (#12).
+ * It runs the S1 no-JS pass in a real browser with scripting off, counts the S3
+ * affordances at 390x844, checks that no `view-transition-name` is duplicated,
+ * and records whether the cross-document transition actually fired — with and
+ * without `prefers-reduced-motion: reduce`. Screenshots land next to this file.
+ *
+ * Needs Playwright, which this repo has only as a transitive dependency of
+ * `@vitest/browser-playwright`:
+ *
+ *   ln -s .pnpm/playwright@1.60.0/node_modules/playwright node_modules/playwright
+ *
+ * and its system libraries, which this sandbox lacks and cannot install. Same
+ * workaround as the spike (#12): `apt-get download` the libraries the launch
+ * error names, `dpkg -x` them into a directory, and put every directory holding
+ * a `.so` on LD_LIBRARY_PATH.
  */
 import { chromium } from 'playwright'
 
@@ -147,7 +158,10 @@ const browser = await chromium.launch()
         const name = getComputedStyle(element).viewTransitionName
         if (name && name !== 'none') seen.set(name, (seen.get(name) ?? 0) + 1)
       }
-      return { names: [...seen.keys()].toSorted((a, b) => a.localeCompare(b)), duplicated: [...seen].filter(([, n]) => n > 1).map(([name]) => name) }
+      return {
+        names: [...seen.keys()].toSorted((a, b) => a.localeCompare(b)),
+        duplicated: [...seen].filter(([, n]) => n > 1).map(([name]) => name),
+      }
     })
   }
   out('Signature interaction — view-transition-name uniqueness per document', duplicates)
@@ -200,6 +214,13 @@ for (const reducedMotion of ['no-preference', 'reduce']) {
   await recordTransitions(context)
   const page = await context.newPage()
   await page.goto(FRONT, { waitUntil: 'load' })
+  /* The dev server loses the first transition out of a cold context: the incoming
+     document is still being transformed when `pagereveal` fires, so it has not
+     seen `@view-transition` yet and the browser skips the transition. Reproduced
+     1-in-6 without this settle, 0-in-6 with it. A dev-mode race, not the concept —
+     but worth knowing that a tap during a slow first load loses the morph and
+     still gets the page. */
+  await page.waitForTimeout(400)
   await page.evaluate(() => sessionStorage.setItem('vt', '[]'))
   await page.click('a[href*="p=tabley"]')
   await page.waitForURL(/p=tabley/)
@@ -216,6 +237,7 @@ for (const reducedMotion of ['no-preference', 'reduce']) {
   await recordTransitions(context)
   const page = await context.newPage()
   await page.goto(TABLEY, { waitUntil: 'load' })
+  await page.waitForTimeout(400)
   await page.evaluate(() => sessionStorage.setItem('vt', '[]'))
   await page.click('a[href*="p=matrix"]')
   await page.waitForURL(/p=matrix/)
