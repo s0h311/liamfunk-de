@@ -10,7 +10,7 @@ after which the real site is built. See
 ### The tournament
 
 **Concept**:
-One candidate answer to what the whole site *is*. Named, and carried by exactly
+One candidate answer to what the whole site _is_. Named, and carried by exactly
 one prototype per round.
 _Avoid_: idea, direction, design
 
@@ -21,13 +21,23 @@ _Avoid_: demo, POC, mock
 
 **Round**:
 A batch of prototypes built at equal fidelity so they can be compared fairly.
-Fidelity is equal *within* a round, never across rounds.
+Fidelity is equal _within_ a round, never across rounds.
 
 **The cut**:
 The single point where the roster is reduced to two finalists.
 
+**Control group**:
+Prototypes from an earlier round left in play, unrebuilt, so a later round's
+concepts are compared against something rather than only against each other.
+
+**Keeper**:
+A technique that outlives the concept that invented it. Keepers are harvested at
+the cut, separately from picking concepts, so the winner can carry a device its
+own prototype never invented.
+_Avoid_: pattern, component, learning
+
 **Positioning**:
-What the site is *for* — calling card, playground, hiring-first, or simulation.
+What the site is _for_ — calling card, playground, hiring-first, or simulation.
 A tag on a concept, not a bucket it sits in.
 
 **Signature interaction**:
@@ -35,7 +45,7 @@ The one interaction a concept is judged on; the thing that makes it that concept
 and not another.
 
 **Front door**:
-The site's arrival surface. Names a *role*, not a page shape — a front door need
+The site's arrival surface. Names a _role_, not a page shape — a front door need
 not scroll and need not be a page.
 _Avoid_: homepage, landing page, index
 
@@ -53,7 +63,7 @@ structure.
 **Story**:
 A fixed sequence of full-viewport **scenes**. Each scene holds one idea, a real
 URL names each scene, and **transport** carries the visitor between them.
-*Fixed* means authored — the sequence may branch, but every route through it was
+_Fixed_ means authored — the sequence may branch, but every route through it was
 placed by hand.
 _Avoid_: narrative, journey, flow, scrollytelling
 
@@ -84,7 +94,7 @@ The crawler half of S1: words in the served HTML, every destination a real
 `<a href>`, real URLs, no state in the hash.
 
 **S1b**:
-The no-JS human half of S1: a person with JavaScript off can read *and navigate*,
+The no-JS human half of S1: a person with JavaScript off can read _and navigate_,
 not merely receive the strings.
 
 **S2**:
@@ -96,7 +106,7 @@ interactions, with the affordance in the first viewport.
 
 **Anti-target**:
 A pattern whose mere presence signals "template" or "trend-follow" regardless of
-execution quality. Fatal only when it *is* the signature interaction.
+execution quality. Fatal only when it _is_ the signature interaction.
 
 **Pixel layer**:
 An optional WebGL or canvas enhancement over the semantic document. It carries
@@ -107,7 +117,7 @@ _Avoid_: hero, canvas, 3D background
 
 **Raw material**:
 The real words about Liam that every prototype renders, in
-`docs/raw-material.md`. Nothing is invented; missing facts are faked *visibly*.
+`docs/raw-material.md`. Nothing is invented; missing facts are faked _visibly_.
 
 **Refusal vocabulary**:
 A first-class way for the site to say a thing is not finished, not available or
