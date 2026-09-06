@@ -3,8 +3,10 @@
 import '../index.css'
 
 import type { ReactNode } from 'react'
-import { Outlet, createRootRoute, HeadContent, Scripts } from '@tanstack/react-router'
+import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -45,8 +47,10 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className='flex flex-col px-3 pt-3 lg:px-0 lg:max-w-5xl mx-auto font-mono min-h-dvh'>
+        <Navbar />
         {children}
+        <Footer className='mt-auto' />
         <Scripts />
       </body>
     </html>
