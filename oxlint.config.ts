@@ -6,7 +6,7 @@ export default defineConfig({
     typeCheck: true,
   },
   plugins: ['unicorn', 'react', 'typescript', 'oxc', 'react-perf', 'vitest', 'jsx-a11y', 'node', 'import', 'promise'],
-  ignorePatterns: ['*.gen.ts', 'server/infrastructure/Database/migrations', 'app/components/ui'],
+  ignorePatterns: ['*.gen.ts', 'app/components/ui'],
   rules: {
     'max-params': ['error', { max: 2 }],
     'typescript/consistent-type-definitions': ['error', 'type'],

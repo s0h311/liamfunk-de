@@ -12,16 +12,6 @@ services:
         condition: service_started
     networks:
       - liamfunk-de-network
-  postgres:
-    image: postgres:18-alpine3.23
-    restart: on-failure
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - liamfunk-de_postgres:/var/lib/postgresql
-    networks:
-      - liamfunk-de-network
 
 volumes:
   liamfunk-de_postgres:

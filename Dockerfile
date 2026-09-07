@@ -15,4 +15,4 @@ RUN pnpm build
 
 RUN chmod +x start.sh
 
-CMD ["./start.sh"]
+CMD ["node", ".output/server/index.mjs"]

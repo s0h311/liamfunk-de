@@ -47,7 +47,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <HeadContent />
       </head>
-      <body className='flex flex-col px-3 pt-3 lg:px-0 lg:max-w-5xl mx-auto font-mono min-h-dvh'>
+      <body className='flex flex-col gap-5 px-3 pt-3 lg:px-0 lg:max-w-3xl mx-auto font-mono min-h-dvh'>
         <Navbar />
         {children}
         <Footer className='mt-auto' />

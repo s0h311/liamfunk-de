@@ -9,7 +9,7 @@ type Props = {
 
 export default function Navbar({ className }: Props) {
   return (
-    <nav className={cn('flex items-center justify-between border-2 border-dashed p-3', className)}>
+    <nav className={cn('flex items-center justify-between border-2 border-dashed p-3 text-sm', className)}>
       <Wordmark />
 
       <div className='flex items-center gap-2'>
