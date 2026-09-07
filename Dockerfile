@@ -13,6 +13,4 @@ COPY . .
 
 RUN pnpm build
 
-RUN chmod +x start.sh
-
 CMD ["node", ".output/server/index.mjs"]
