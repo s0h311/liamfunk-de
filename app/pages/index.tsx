@@ -15,7 +15,7 @@ function HomePage() {
 
       <p>
         I started with programming at age 11 due to an unglamarous reason: I was utterly bad at computer games. So I
-        wrote hacks that made me rich in{' '}
+        wrote hacks (little programs) that made me rich in{' '}
         <a
           href='https://en.wikipedia.org/wiki/Dragon_City'
           target='_blank'
@@ -33,7 +33,19 @@ function HomePage() {
       </p>
 
       <h2>Work</h2>
-      <p>WIP 🚧</p>
+
+      <h3>Rock Science</h3>
+
+      <p>
+        I run a product studio called{' '}
+        <a
+          href='https://rock-science.com'
+          target='_blank'
+        >
+          Rock Science
+        </a>
+        , through it I build intuitive applications for businesses.
+      </p>
       <h2>Thoughts</h2>
       <p>WIP 🚧</p>
       <h2>Travel</h2>
